@@ -1,6 +1,6 @@
 package arraysortingtest;
 
-import utilities.ArrayPrint;
+import utilities.ArrayUtilities;
 
 public class MergeSort
 {
@@ -26,9 +26,7 @@ public class MergeSort
 			// Break up array.
 
 			int cutPoint = unsorted.length / 2;
-			
-			System.out.println( "cutPoint: " + cutPoint );
-			
+						
 			int[] chunk1 = new int[cutPoint];
 			int[] chunk2 = new int[unsorted.length - cutPoint];
 			
@@ -42,16 +40,15 @@ public class MergeSort
 
 	// Should really be private, but unit tests...
 	// UUGGLLYY.  But unit test say this function works pretty well.
-	public int[] Merge( int[] chunk1, int[] chunk2 )
+	public int[] Merge( int[] chunk1, int[] chunk2 )  throws NullPointerException
 	{
 		
 		if ( chunk1 == null || chunk2 == null )
 		{
-			// WTF? Should really throw an exception here.
-			return null;
+			throw new NullPointerException();
 		}
 		
-		ArrayPrint arrayUtils = new ArrayPrint();
+		ArrayUtilities arrayUtils = new ArrayUtilities();
 		
 		int[] mergedArray = new int[chunk1.length + chunk2.length];
 

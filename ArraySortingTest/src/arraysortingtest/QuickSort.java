@@ -1,7 +1,7 @@
 package arraysortingtest;
 
 import execptions.InvalidRangeException;
-import utilities.ArrayPrint;
+import utilities.ArrayUtilities;
 
 public class QuickSort
 {
@@ -10,12 +10,27 @@ public class QuickSort
 	{
 	}
 
-	public int[] Sort( int[] unsorted )
+	public int[] Sort( int[] unsorted ) throws NullPointerException
 	{
+		if ( unsorted == null )
+		{
+			throw new NullPointerException( );
+		}
+
+		try
+		{
 		if ( unsorted.length != 1 )
 		{
 			// Call partition
 			Partition( unsorted, 0, unsorted.length - 1 );
+		}
+		}
+		catch ( NullPointerException e )
+		{
+			System.out.println( "Caught NullPointerException from Partition( )" );
+			
+			// Last rethrow...
+			throw e;
 		}
 
 		return unsorted;
@@ -65,8 +80,14 @@ public class QuickSort
 	// partition function.
 	// This picks our pivot, and rearranges the array accordingly.
 	public void Partition( int[] array, int start, int end )
+			throws NullPointerException
 	{
-		ArrayPrint arrayUtils = new ArrayPrint( );
+		if ( array == null )
+		{
+			throw new NullPointerException( );
+		}
+
+		ArrayUtilities arrayUtils = new ArrayUtilities( );
 
 		// We only do anything here, if portion we're working on is > 1 element.
 		// Stopping case falls right through.
@@ -120,23 +141,34 @@ public class QuickSort
 				array[i - 1] = array[i];
 			}
 
-			// Finally, place the pivot.  We're ready to recurse.
+			// Finally, place the pivot. We're ready to recurse.
 			array[tooSmallIndex] = pivotValue;
-			
+
 			// Recurse time!
 			// Check for degenerate cases, i.e. pivot at start/end.
-			if ( tooSmallIndex == start )
+
+			try
 			{
-				Partition( array, tooSmallIndex + 1, end );
+				if ( tooSmallIndex == start )
+				{
+					Partition( array, tooSmallIndex + 1, end );
+				}
+				else if ( tooSmallIndex == end )
+				{
+					Partition( array, start, tooSmallIndex - 1 );
+				}
+				else
+				{
+					Partition( array, start, tooSmallIndex - 1 );
+					Partition( array, tooSmallIndex + 1, end );
+				}
 			}
-			else if (tooSmallIndex == end )
+			catch( NullPointerException e )
 			{
-				Partition( array, start, tooSmallIndex - 1 );
-			}
-			else
-			{
-				Partition( array, start, tooSmallIndex - 1);
-				Partition( array, tooSmallIndex + 1, end );
+				System.out.println( "Partition: Caught NullPointerException." );
+
+				// Rethrow.
+				throw e;
 			}
 		}
 	}

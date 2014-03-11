@@ -17,17 +17,25 @@ public class SelectionSortUnitTests
 
 		int[] testArray = { 50, 1, 0, -20, 123, 3, 434, 2, 3, 4, 5, 2, 556,
 				432, 4, 56 };
-		
-		int[] result = selectionSort.Sort( testArray );
 
-		Assert.assertEquals( true, IsSorted( result ) );
+		try
+		{
+			int[] result = selectionSort.Sort( testArray );
+
+			Assert.assertEquals( true, IsSorted( result ) );
+		}
+		catch( NullPointerException e )
+		{
+			System.out.println( "Caught an unexpected NullPointerException" );
+			fail( "Caught an unexpected NullPointerException" );
+		}
 	}
 
-	private boolean IsSorted( int[] array )
+	private boolean IsSorted( int[] array ) throws NullPointerException
 	{
 		if ( array == null )
 		{
-			return false;
+			throw new NullPointerException( );
 		}
 
 		for( int i = 0 ; i < ( array.length - 1 ) ; ++i )

@@ -17,16 +17,48 @@ public class InsertionSortUnitTests
 		int[] testArray = { 50, 1, 0, -20, 123, 3, 434, 2, 3, 4, 5, 2, 556,
 				432, 4, 56 };
 
-		int[] result = insertionSort.Sort( testArray );
+		try
+		{
+			int[] result = insertionSort.Sort( testArray );
 
-		Assert.assertEquals( true, IsSorted( result ) );
+			Assert.assertEquals( true, IsSorted( result ) );
+		}
+		catch( NullPointerException e )
+		{
+			System.out.println( "Caught an unexpected NullPointerException" );
+
+			fail( "Caught an unexpected NullPointer Exception" );
+		}
 	}
 
-	private boolean IsSorted( int[] array )
+	@Test
+	public void testSortNullArray( )
+	{
+		InsertionSort insertionSort = new InsertionSort( );
+
+		int[] testArray = null;
+
+		try
+		{
+			int[] result = insertionSort.Sort( testArray );
+
+			Assert.assertEquals( true, IsSorted( result ) );
+		}
+		catch( NullPointerException e )
+		{
+			System.out.println( "Caught an expected NullPointerException" );
+
+			// Bullshit code.
+			boolean result = true;
+			Assert.assertEquals( true, result );
+		}
+	}
+
+	private boolean IsSorted( int[] array ) throws NullPointerException
 	{
 		if ( array == null )
 		{
-			return false;
+			throw new NullPointerException();
 		}
 
 		for( int i = 0 ; i < ( array.length - 1 ) ; ++i )

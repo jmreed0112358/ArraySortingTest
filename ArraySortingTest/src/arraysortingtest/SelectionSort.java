@@ -7,12 +7,17 @@ public class SelectionSort
 	{
 	}
 
-	public int[] Sort( int[] unsorted )
+	public int[] Sort( int[] unsorted ) throws NullPointerException
 	{
+		if ( unsorted == null )
+		{
+			throw new NullPointerException( );
+		}
+
 		int[] sorted = new int[unsorted.length];
 
 		int index = unsorted.length - 1;
-		
+
 		for( int i = index ; i != -1 ; --i )
 		{
 			// Search the array for the largest item.

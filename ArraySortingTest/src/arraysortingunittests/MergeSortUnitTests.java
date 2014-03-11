@@ -1,11 +1,11 @@
 package arraysortingunittests;
 
 import static org.junit.Assert.*;
-import junit.framework.Assert;
 
+import org.junit.Assert;
 import org.junit.Test;
 
-import utilities.ArrayPrint;
+import utilities.ArrayUtilities;
 
 import arraysortingtest.MergeSort;
 
@@ -29,78 +29,147 @@ public class MergeSortUnitTests
 	public void testMergeEqual( )
 	{
 		MergeSort mergeSort = new MergeSort( );
-		ArrayPrint arrayUtils = new ArrayPrint( );
+		ArrayUtilities arrayUtils = new ArrayUtilities( );
 
 		int[] arrayOne = { 0, 3, 5 };
 		int[] arrayTwo = { 1, 2, 4 };
 
 		int[] expected = { 0, 1, 2, 3, 4, 5 };
 
-		System.out.print( "expected: " );
-		arrayUtils.Print( expected );
-		System.out.println( "" );
-		
-		Assert.assertEquals(
-				true,
-				AreArraysEqual( expected, mergeSort.Merge( arrayOne, arrayTwo ) ) );
-
+		try
+		{
+			Assert.assertArrayEquals( expected,
+					mergeSort.Merge( arrayOne, arrayTwo ) );
+		}
+		catch( NullPointerException e )
+		{
+			System.out.println( "WTF?  Caught NullPointerException, "
+					+ "even though our args are not null??  "
+					+ "Somewhere, someone fucked us." );
+		}
 	}
-	
+
 	@Test
 	public void testMergeJaggedOne( )
 	{
 		MergeSort mergeSort = new MergeSort( );
-		ArrayPrint arrayUtils = new ArrayPrint( );
+		ArrayUtilities arrayUtils = new ArrayUtilities( );
 
 		int[] arrayOne = { 0, 3, 5, 6, 7 };
 		int[] arrayTwo = { 1, 2, 4 };
 
 		int[] expected = { 0, 1, 2, 3, 4, 5, 6, 7 };
 
-		System.out.print( "expected: " );
-		arrayUtils.Print( expected );
-		System.out.println( "" );
-		
-		Assert.assertEquals(
-				true,
-				AreArraysEqual( expected, mergeSort.Merge( arrayOne, arrayTwo ) ) );
+		try
+		{
+			Assert.assertArrayEquals( expected,
+					mergeSort.Merge( arrayOne, arrayTwo ) );
+		}
+		catch( NullPointerException e )
+		{
+			System.out.println( "WTF?  Caught NullPointerException, "
+					+ "even though our args are not null??  "
+					+ "Somewhere, someone fucked us." );
+		}
 
 	}
-	
+
 	@Test
 	public void testMergeJaggedTwo( )
 	{
 		MergeSort mergeSort = new MergeSort( );
-		ArrayPrint arrayUtils = new ArrayPrint( );
+		ArrayUtilities arrayUtils = new ArrayUtilities( );
 
 		int[] arrayOne = { 0, 3, 5, 8, 9, 10, 11, 12 };
 		int[] arrayTwo = { 1, 2, 4, 6, 7 };
 
-		int[] expected = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12  };
+		int[] expected = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
 
-		System.out.print( "expected: " );
-		arrayUtils.Print( expected );
-		System.out.println( "" );
-		
-		Assert.assertEquals(
-				true,
-				AreArraysEqual( expected, mergeSort.Merge( arrayOne, arrayTwo ) ) );
+		try
+		{
+			Assert.assertArrayEquals( expected,
+					mergeSort.Merge( arrayOne, arrayTwo ) );
+		}
+		catch( NullPointerException e )
+		{
+			System.out.println( "WTF?  Caught NullPointerException, "
+					+ "even though our args are not null??  "
+					+ "Somewhere, someone fucked us." );
+		}
 
 	}
-	
+
 	@Test
-	public void testMergeNulls( )
+	public void testMergeArrayOneNull( )
 	{
 		MergeSort mergeSort = new MergeSort( );
-		ArrayPrint arrayUtils = new ArrayPrint( );
+
+		int[] arrayOne = null;
+		int[] arrayTwo = { 0, 3, 5, 8, 9, 10, 11, 12 };
+
+		int[] sorted;
+
+		try
+		{
+			sorted = mergeSort.Merge( arrayOne, arrayTwo );
+		}
+		catch( NullPointerException e )
+		{
+			System.out.println( "Caught an expected NullPointerException!" );
+
+			// Bullshit code.
+			boolean result = true;
+			Assert.assertEquals( true, result );
+		}
+
+	}
+
+	@Test
+	public void testMergeArrayTwoNull( )
+	{
+		MergeSort mergeSort = new MergeSort( );
 
 		int[] arrayOne = { 0, 3, 5, 8, 9, 10, 11, 12 };
 		int[] arrayTwo = null;
 
-		
-		Assert.assertEquals(
-				null,
-				mergeSort.Merge( arrayOne, arrayTwo ) );
+		int[] sorted;
+
+		try
+		{
+			sorted = mergeSort.Merge( arrayOne, arrayTwo );
+		}
+		catch( NullPointerException e )
+		{
+			System.out.println( "Caught an expected NullPointerException!" );
+
+			// Bullshit code.
+			boolean result = true;
+			Assert.assertEquals( true, result );
+		}
+	}
+
+	@Test
+	public void testMergeBothNulls( )
+	{
+		MergeSort mergeSort = new MergeSort( );
+
+		int[] arrayOne = null;
+		int[] arrayTwo = null;
+
+		int[] sorted;
+
+		try
+		{
+			sorted = mergeSort.Merge( arrayOne, arrayTwo );
+		}
+		catch( NullPointerException e )
+		{
+			System.out.println( "Caught an expected NullPointerException!" );
+
+			// Bullshit code.
+			boolean result = true;
+			Assert.assertEquals( true, result );
+		}
 	}
 
 	private boolean IsSorted( int[] array )
@@ -113,28 +182,6 @@ public class MergeSortUnitTests
 		for( int i = 0 ; i < ( array.length - 1 ) ; ++i )
 		{
 			if ( !( array[i] <= array[i + 1] ) )
-			{
-				return false;
-			}
-		}
-		return true;
-	}
-
-	private boolean AreArraysEqual( int[] arrayOne, int[] arrayTwo )
-	{
-		if ( arrayOne == null || arrayTwo == null )
-		{
-			return false;
-		}
-
-		if ( arrayOne.length != arrayTwo.length )
-		{
-			return false;
-		}
-
-		for( int i = 0 ; i < arrayOne.length ; ++i )
-		{
-			if ( arrayOne[i] != arrayTwo[i] )
 			{
 				return false;
 			}
