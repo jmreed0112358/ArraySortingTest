@@ -1,35 +1,28 @@
 package arraysortingtest;
 
-public class SelectionSort
-{
+public class SelectionSort {
 
-	public SelectionSort( )
-	{
+    public SelectionSort() {
+    }
+
+    public int[] Sort(int[] unsorted) throws NullPointerException {
+	if (unsorted == null) {
+	    throw new NullPointerException();
 	}
 
-	public int[] Sort( int[] unsorted ) throws NullPointerException
-	{
-		if ( unsorted == null )
-		{
-			throw new NullPointerException( );
+	int[] sorted = new int[unsorted.length];
+
+	int index = unsorted.length - 1;
+
+	for (int i = index; i != -1; --i) {
+	    // Search the array for the largest item.
+	    for (int j = 0; j <= i; ++j) {
+		if (unsorted[j] >= unsorted[index]) {
+		    index = j;
 		}
-
-		int[] sorted = new int[unsorted.length];
-
-		int index = unsorted.length - 1;
-
-		for( int i = index ; i != -1 ; --i )
-		{
-			// Search the array for the largest item.
-			for( int j = 0 ; j <= i ; ++j )
-			{
-				if ( unsorted[j] >= unsorted[index] )
-				{
-					index = j;
-				}
-			}
-			sorted[i] = unsorted[index];
-		}
-		return sorted;
+	    }
+	    sorted[i] = unsorted[index];
 	}
+	return sorted;
+    }
 }

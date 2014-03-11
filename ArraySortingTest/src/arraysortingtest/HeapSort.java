@@ -1,24 +1,20 @@
 package arraysortingtest;
 
-public class HeapSort
-{
+public class HeapSort {
 
-	public HeapSort( )
-	{
+    public HeapSort() {
+    }
+
+    public int[] Sort(int[] unsorted) throws NullPointerException {
+	if (unsorted == null) {
+	    throw new NullPointerException();
 	}
-	
-	public int[] Sort( int[] unsorted ) throws NullPointerException
-	{
-		if ( unsorted == null )
-		{
-			throw new NullPointerException( );
-		}
-		
-		int[] sorted = new int[unsorted.length];
 
-		// Do whatever is required for HeapSort.
+	int[] sorted = new int[unsorted.length];
 
-		return null;
-	}
+	// Do whatever is required for HeapSort.
+
+	return null;
+    }
 
 }
