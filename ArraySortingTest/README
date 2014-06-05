@@ -1,0 +1,5 @@
+Various array sorting techniques in Java.
+
+The classes here are my own code, written while reading Deitel & Deitel's Java for Programmers.
+
+Some of these are not as efficient in terms of memory usage as they should be. :(

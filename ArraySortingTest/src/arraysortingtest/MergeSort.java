@@ -21,6 +21,12 @@ public class MergeSort {
 
 	    int cutPoint = unsorted.length / 2;
 
+	    // We should change this so that we're logically dividing the array,
+	    // as opposed to creating two whole new arrays. This ups the storage
+	    // requirements past the usual O(2n) storage complexity.
+	    // Inefficient. Shouldn't be difficult to update the algorithm to do
+	    // this.
+	    // The final merge step will still require a 2nd array.
 	    int[] chunk1 = new int[cutPoint];
 	    int[] chunk2 = new int[unsorted.length - cutPoint];
 
